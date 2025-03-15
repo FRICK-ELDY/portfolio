@@ -16,19 +16,19 @@
 # General application configuration
 import Config
 
-config :front,
+config :top,
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :front, FrontWeb.Endpoint,
+config :top, TopWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: FrontWeb.ErrorHTML, json: FrontWeb.ErrorJSON],
+    formats: [html: TopWeb.ErrorHTML, json: TopWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Front.PubSub,
-  live_view: [signing_salt: "c6rWBj+8"]
+  pubsub_server: Top.PubSub,
+  live_view: [signing_salt: "ddHZhuSC"]
 
 # Configures the mailer
 #
@@ -37,28 +37,28 @@ config :front, FrontWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :front, Front.Mailer, adapter: Swoosh.Adapters.Local
+config :top, Top.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  front: [
+  top: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../apps/front/assets", __DIR__),
+    cd: Path.expand("../apps/top/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.3",
-  front: [
+  top: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css
       --output=../priv/static/assets/app.css
     ),
-    cd: Path.expand("../apps/front/assets", __DIR__)
+    cd: Path.expand("../apps/top/assets", __DIR__)
   ]
 
 # Configures Elixir's Logger
