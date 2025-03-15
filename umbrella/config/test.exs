@@ -2,13 +2,13 @@ import Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :front, FrontWeb.Endpoint,
+config :top, TopWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "7VpdY63MH00N/l428ybFlNb9Pb6VBhbC9c2TqyEo66wImp5b0BvX/rKaAaXJTsXN",
+  secret_key_base: "olmo8RWcJoQ665rw1tU5yIAYZu1Wn/mVeHd2tgZk5V0jTMVcRecd2vY9iwxpNiwP",
   server: false
 
 # In test we don't send emails
-config :front, Front.Mailer, adapter: Swoosh.Adapters.Test
+config :top, Top.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false
