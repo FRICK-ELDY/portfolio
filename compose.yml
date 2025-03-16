@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: umbrella/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      MIX_ENV: prod
