@@ -1,0 +1,18 @@
+FROM elixir:1.18.2
+
+ENV MIX_ENV=dev
+ENV APP_NAME=top
+
+RUN apt-get update && apt-get install -y 
+RUN apt-get -y upgrade
+RUN apt-get -y install bash git vim sudo curl inotify-tools 
+
+WORKDIR /app
+COPY . .
+
+WORKDIR /app/umbrella
+RUN mix local.hex --force
+RUN mix local.rebar --force
+RUN mix deps.get
+
+CMD ["mix", "phx.server"]
