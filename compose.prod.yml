@@ -12,3 +12,12 @@ services:
     environment:
       PORT: 4000
       MIX_ENV: prod
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
