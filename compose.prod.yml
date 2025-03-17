@@ -3,7 +3,8 @@ services:
   app:
     build:
       context: .
-      dockerfile: umbrella/Dockerfile
+      dockerfile: umbrella/Dockerfile.prod
+    container_name: portfolio_prod
     env_file:
       - .env
     ports:
