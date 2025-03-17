@@ -15,3 +15,12 @@ services:
     environment:
       MIX_ENV: "dev"
     command: ["mix", "phx.server"]
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
