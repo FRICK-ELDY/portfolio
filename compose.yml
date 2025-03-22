@@ -17,12 +17,10 @@ services:
   nginx_dev:
     profiles: ["dev"]
     image: nginx:latest
-    environment:
-      - NGINX_SERVER_NAME=localhost
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app_dev
 
@@ -45,11 +43,9 @@ services:
   nginx:
     profiles: ["prod"]
     image: nginx:latest
-    environment:
-      - NGINX_SERVER_NAME=frick-eldy.com
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
