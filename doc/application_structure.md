@@ -1,0 +1,9 @@
+- `umbrella/`
+  - `apps/`
+    - `top/`  … Phoenixプロジェクト (--no-ecto --no-dashboard)
+  - `Dockerfile`  … ElixirアプリのDockerイメージビルド用
+- `compose.yml`  … Docker Compose設定ファイル
+- `nginx/`
+  - `nginx.dev.conf` … 開発環境用
+  - `nginx.prod.conf` … 本番環境用
+- `.env`          … 環境変数ファイル（SECRET_KEY_BASEなど）
