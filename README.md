@@ -1,6 +1,6 @@
 ## 概要
-`Elixir/Phoenix`を使用した**FRICKのポートフォリオサイト**です。
-`Elixir`以外の技術に`Docker`,`nginx`,`certbot`,`systemd`,`GitHubActions`を使っています。
+`Elixir/Phoenix`を使用した**FRICKのポートフォリオサイト**です。  
+`Elixir`以外の技術に`Docker`,`nginx`,`certbot`,`systemd`,`GitHubActions`を使っています。  
 DB周りは[Ash Framework](https://hexdocs.pm/ash/readme.html)を使用しています。
 
 ## 開発環境
