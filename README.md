@@ -1,7 +1,7 @@
 ## 概要
 `Elixir/Phoenix`を使用した**FRICKのポートフォリオサイト**です。  
 `Elixir`以外の技術に`Docker`,`nginx`,`certbot`,`systemd`,`GitHubActions`を使っています。  
-DB周りは [Ash Framework](https://hexdocs.pm/ash/readme.html) を利用し管理画面等で使用しています。
+DB周りは [Ash Framework](https://hexdocs.pm/ash/readme.html) を利用し、管理画面等で使用しています。
 
 ## 開発環境
 - OS: Ubuntu | Mac | Windows + WSL2
