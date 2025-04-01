@@ -2,7 +2,7 @@
 - 目的: [FRICKのポートフォリオサイト](https://frick-eldy.com)を構築する為のプロジェクト
 - 主要技術:
   - `Elixir/Phoenix`: Webアプリケーションフレームワーク
-  - `Ash Framework`: データベースのCRUD操作や認証・認可の管理
+  - `Ash Framework`: データベースのCRUD操作や認証/認可の管理
   - `Docker`: アプリケーションのコンテナ化
   - `Nginx`: リバースプロキシおよびSSL対応
   - `Certbot`: SSL証明書の管理
@@ -15,8 +15,8 @@
   - `Docker Desktop`（※Ubuntu以外）
   - `VSCode`
   - `asdf`
-  - `erlang` + `elixir`
-- バージョン管理: `Git` (GitHub)
+    - `erlang` + `elixir`
+- バージョン管理: `Git`,`GitHub`
 
 ## リポジトリ
 - URL: https://github.com/FRICK-ELDY/portfolio
