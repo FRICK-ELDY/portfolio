@@ -1,13 +1,13 @@
 ## 概要
-- 目的: **FRICKのポートフォリオサイト**を構築する為のプロジェクト
+- 目的: ポートフォリオサイトを構築する為のプロジェクト
 - 主要技術:
-  - Elixir/Phoenix: Webアプリケーションフレームワーク
-  - Ash Framework: DBのCRUDや認証・認可などの管理
-  - Docker: コンテナ化
-  - Nginx: リバースプロキシおよびSSL対応
-  - Certbot: SSL証明書の管理
-  - Systemd: サービスの起動管理
-  - GitHub Actions: CI/CDの構築
+  - `Elixir/Phoenix`: Webアプリケーションフレームワーク
+  - `Ash Framework`: DBのCRUDや認証・認可などの管理
+  - `Docker`: コンテナ化
+  - `Nginx`: リバースプロキシおよびSSL対応
+  - `Certbot`: SSL証明書の管理
+  - `Systemd`: サービスの起動管理
+  - `GitHub Actions`: CI/CDの構築
 
 ## 開発環境
 - OS: Ubuntu | Mac | Windows + WSL2
