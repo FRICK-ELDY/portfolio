@@ -25,12 +25,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-        　cd $GITHUB_WORKSPACE/umbrella
+          cd $GITHUB_WORKSPACE/umbrella
           mix local.hex --force
           mix local.rebar --force
           mix deps.get
 
       - name: Run Tests
-        cd $GITHUB_WORKSPACE/umbrella
-        run: mix test
-          
+        run: |
+          cd $GITHUB_WORKSPACE/umbrella
+          run: mix test
