@@ -1,7 +1,13 @@
 ## 概要
-`Elixir/Phoenix`を使用した**FRICKのポートフォリオサイト**です。  
-`Elixir`以外の技術に`Docker`,`nginx`,`certbot`,`systemd`,`GitHubActions`を使っています。  
-DB周りは [Ash Framework](https://hexdocs.pm/ash/readme.html) を利用し、管理画面等で使用しています。
+- 目的: **FRICKのポートフォリオサイト**を構築する為のプロジェクト
+- 主要技術:
+  - Elixir/Phoenix: Webアプリケーションフレームワーク
+  - Ash Framework: DBのCRUDや認証・認可などの管理
+  - Docker: コンテナ化
+  - Nginx: リバースプロキシおよびSSL対応
+  - Certbot: SSL証明書の管理
+  - Systemd: サービスの起動管理
+  - GitHub Actions: CI/CDの構築
 
 ## 開発環境
 - OS: Ubuntu | Mac | Windows + WSL2
