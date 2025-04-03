@@ -27,6 +27,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SAKURA_HOST_KEY }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy to Sakura Internet
         run: |
