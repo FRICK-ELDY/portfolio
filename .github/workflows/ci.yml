@@ -30,6 +30,11 @@ jobs:
           mix local.rebar --force
           mix deps.get
 
+      - name: Run Compile
+        run: |
+          cd $GITHUB_WORKSPACE/umbrella
+          mix compile
+
       - name: Run Tests
         run: |
           cd $GITHUB_WORKSPACE/umbrella
