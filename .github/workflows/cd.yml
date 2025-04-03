@@ -36,7 +36,7 @@ jobs:
           echo "Pulling latest code..."
           git pull origin main
           cd /home/ubuntu/portfolio/umbrella
-          rm -rf _build deps
+          sudo rm -rf _build deps
           mix deps.clean --all
           echo "mix deps.get..."
           mix deps.get
