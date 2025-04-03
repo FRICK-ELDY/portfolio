@@ -34,9 +34,10 @@ jobs:
           ssh ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }} << 'EOF'
           set -e
           echo "Pulling latest code..."
+          cd /home/ubuntu/portfolio
           git pull origin main
           cd /home/ubuntu/portfolio/umbrella
-          sudo rm -rf _build deps
+          rm -rf _build deps
           mix deps.clean --all
           echo "mix deps.get..."
           mix deps.get
