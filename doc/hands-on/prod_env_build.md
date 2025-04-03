@@ -1,4 +1,5 @@
 ## さくらインターネットVPSでUbuntu 24.04を用意
+「パケットフィルターの設定」-> 「パケットフィルターを設定」ボタンを押す->Webを追加
 ## SSH もしくは VNC Console でログイン
 ### ログイン
 ```bash
@@ -16,7 +17,7 @@ ssh-keygen -t rsa -b 4096 -C "label@example"
 mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
-- リポジトリの「Settings」→「Secrets and variables」→「Actions」→「Repository secrets」
+- リポジトリの「Settings」->「Secrets and variables」->「Actions」->「Repository secrets」
   - 秘密鍵を新たなシークレットとして登録
 - user_nameはデフォルトだとrootやubuntu
 #### known_hostsの設定
