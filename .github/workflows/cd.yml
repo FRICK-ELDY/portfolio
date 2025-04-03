@@ -32,6 +32,11 @@ jobs:
       - name: Deploy to Sakura Internet
         run: |
           ssh ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }} << 'EOF'
-          
-          
+          set -e
+          cd /home/ubuntu/portfolio
+          echo "Pulling latest code..."
+          git pull origin main
+          echo "Building and starting Docker containers..."
+          docker compose --profile prod up -d --build
+          echo "Deployment finished."
           EOF
