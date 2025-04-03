@@ -40,7 +40,7 @@
 - [デプロイフロー](./doc/deploy_flow.md)
 
 # その他
-- [開発環境構築](./doc/dev_env_build.md)
-- [本番環境構築](./doc/prod_env_build.md)
+- [開発環境構築](./doc/hands-on/dev_env_build.md)
+- [本番環境構築](./doc/hands-on/prod_env_build.md)
 - [運用・監視](./doc/operation_monitoring.md)
 - [アプリケーション構造](./doc/application_structure.md)
