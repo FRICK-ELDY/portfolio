@@ -36,14 +36,6 @@ jobs:
           echo "Pulling latest code..."
           cd /home/ubuntu/portfolio
           git pull origin main
-          cd /home/ubuntu/portfolio/umbrella
-          rm -rf _build deps
-          mix deps.clean --all
-          echo "mix deps.get..."
-          mix deps.get
-          echo "mix compile..."
-          mix compile
-          cd /home/ubuntu/portfolio
           echo "Building and starting Docker containers..."
           docker compose --profile prod up -d --build
           echo "Deployment finished."
