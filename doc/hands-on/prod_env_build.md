@@ -22,9 +22,9 @@ chmod 600 ~/.ssh/authorized_keys
 - user_nameはデフォルトだとrootやubuntu
 #### known_hostsの設定
 ```bash
-cat /etc/ssh/ssh_host_rsa_key.pub
+ssh-keyscan -H xxx-xxx-xxxxx.vs.sakura.ne.jp
 ```
-- 
+- Man-in-the-Middle 攻撃対策
 - リポジトリの「Settings」→「Secrets and variables」→「Actions」→「Repository secrets」
   - 秘密鍵を新たなシークレットとして登録
 
