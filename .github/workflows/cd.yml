@@ -81,9 +81,9 @@ jobs:
     - name: Copy compose files, nginx config, and .env to server
       run: |
         echo "Copying docker-compose files to server..."
-        scp -o StrictHostKeyChecking=yes ./compose.prod.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/compose.yml
+        scp -o StrictHostKeyChecking=yes ./prod/compose.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/compose.yml
         echo "Copying nginx configuration to server..."
-        scp -o StrictHostKeyChecking=yes ./nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/nginx/nginx.conf
+        scp -o StrictHostKeyChecking=yes ./prod/nginx/nginx.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/nginx/nginx.conf
         echo "Copying .env to server..."
         scp -o StrictHostKeyChecking=yes .env ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/.env
     
