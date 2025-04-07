@@ -16,3 +16,11 @@ docker compose run --rm certbot \
 ```
 docker compose restart nginx
 ```
+
+## 証明書の自動更新設定
+```
+sudo mv /home/${{ secrets.SAKURA_USER }}/portfolio/systemd/certbot-renew.service /etc/systemd/system/certbot-renew.service
+sudo mv /home/${{ secrets.SAKURA_USER }}/portfolio/systemd/certbot-renew.timer /etc/systemd/system/certbot-renew.timer
+sudo systemctl enable certbot-renew.timer
+sudo systemctl start certbot-renew.timer
+```
