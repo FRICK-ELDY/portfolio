@@ -21,6 +21,7 @@
 ## リポジトリ
 - URL: https://github.com/FRICK-ELDY/portfolio
 - プルリクエスト必須ルール: コミットは必ずプルリク → レビュー → マージ のフローで実行
+- ghcr.ioの利用: Read and write permissions
 
 ## 本番環境
 - ホスティング: [さくらインターネットVPS](https://secure.sakura.ad.jp/)
