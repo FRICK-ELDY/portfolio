@@ -58,6 +58,13 @@ jobs:
         echo "${{ secrets.SAKURA_HOST_KEY }}" > ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
 
+    - name: Create folders on remote server
+      run: |
+        ssh ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }} << 'EOF'
+          mkdir -p ~/portfolio
+          mkdir -p ~/portfolio/nginx
+        EOF
+
     - name: Create .env file
       run: |
         cat <<EOF > .env
@@ -70,10 +77,8 @@ jobs:
 
     - name: Copy compose files, nginx config, and .env to server
       run: |
-        mkdir -p /home/${{ secrets.SAKURA_USER }}/portfolio
         echo "Copying docker-compose files to server..."
         scp -o StrictHostKeyChecking=yes ./compose.prod.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/compose.yml
-        mkdir -p /home/${{ secrets.SAKURA_USER }}/portfolio/nginx
         echo "Copying nginx configuration to server..."
         scp -o StrictHostKeyChecking=yes ./nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/nginx/nginx.prod.conf
         echo "Copying .env to server..."
@@ -90,7 +95,7 @@ jobs:
         docker pull ghcr.io/frick-eldy/portfolio:latest
 
         echo "Restarting Docker container..."
-        cd /home/${{ secrets.SAKURA_USER }}/portfolio
+        cd ~/portfolio
         docker compose down
         docker compose up -d
         
