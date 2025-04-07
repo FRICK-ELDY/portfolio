@@ -15,7 +15,8 @@
   - `Docker Desktop`（※Ubuntu以外）
   - `VSCode`
   - `asdf`
-    - `erlang` + `elixir`
+    - `erlang`
+    - `elixir`
 - バージョン管理: `Git`,`GitHub`
 
 ## リポジトリ
@@ -29,6 +30,7 @@
   - CPUコア: 2コア、メモリ1GB、SSD 50GB
   - 月額: 990円（初回費用1,694円）
   - IPアドレス: {IPADDRESS}
+  - パケットフィルター: TCP 80/443
 - ドメイン取得・設定: [Cloudflare](https://dash.cloudflare.com/)
   - 取得ドメイン: [frick-eldy.com](https://frick-eldy.com)
   - 年額: 10.44ドル
