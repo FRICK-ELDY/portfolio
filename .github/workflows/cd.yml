@@ -47,6 +47,9 @@ jobs:
     needs: build-and-push
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
     - name: Setup SSH Agent
       uses: webfactory/ssh-agent@v0.5.3
       with:
@@ -78,9 +81,9 @@ jobs:
     - name: Copy compose files, nginx config, and .env to server
       run: |
         echo "Copying docker-compose files to server..."
-        scp -o StrictHostKeyChecking=yes ./compose.prod.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/compose.prod.yml
+        scp -o StrictHostKeyChecking=yes ./compose.prod.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/compose.yml
         echo "Copying nginx configuration to server..."
-        scp -o StrictHostKeyChecking=yes ./nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/nginx/nginx.prod.conf
+        scp -o StrictHostKeyChecking=yes ./nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/nginx/nginx.conf
         echo "Copying .env to server..."
         scp -o StrictHostKeyChecking=yes .env ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/.env
     
