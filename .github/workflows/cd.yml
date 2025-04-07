@@ -37,7 +37,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/portfolio:latest
+          tags: ghcr.io/frick-eldy/portfolio:latest
           file: ./umbrella/Dockerfile
           build-args: MIX_ENV=prod
 
@@ -70,14 +70,14 @@ jobs:
 
     - name: Copy compose files, nginx config, and .env to server
       run: |
-        mkdir -p ~/home/ubuntu/portfolio
+        mkdir -p /home/${{ secrets.SAKURA_USER }}/portfolio
         echo "Copying docker-compose files to server..."
-        scp -o StrictHostKeyChecking=yes ./compose.prod.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/compose.yml
-        mkdir -p ~/home/ubuntu/portfolio/nginx
+        scp -o StrictHostKeyChecking=yes ./compose.prod.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/compose.yml
+        mkdir -p /home/${{ secrets.SAKURA_USER }}/portfolio/nginx
         echo "Copying nginx configuration to server..."
-        scp -o StrictHostKeyChecking=yes ./nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/nginx/nginx.prod.conf
+        scp -o StrictHostKeyChecking=yes ./nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/nginx/nginx.prod.conf
         echo "Copying .env to server..."
-        scp -o StrictHostKeyChecking=yes .env ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/.env
+        scp -o StrictHostKeyChecking=yes .env ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/.env
     
     - name: SSH into server and deploy
       run: |
@@ -87,10 +87,10 @@ jobs:
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
         echo "Pulling latest Docker image..."
-        docker pull ghcr.io/${{ github.repository_owner }}/portfolio:latest
+        docker pull ghcr.io/frick-eldy/portfolio:latest
 
         echo "Restarting Docker container..."
-        cd /home/ubuntu/portfolio
+        cd /home/${{ secrets.SAKURA_USER }}/portfolio
         docker compose down
         docker compose up -d
         
