@@ -66,6 +66,7 @@ jobs:
         ssh ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }} << 'EOF'
           mkdir -p /home/${{ secrets.SAKURA_USER }}/portfolio
           mkdir -p /home/${{ secrets.SAKURA_USER }}/portfolio/nginx
+          mkdir -p /home/${{ secrets.SAKURA_USER }}/portfolio/systemd
         EOF
 
     - name: Create .env file
@@ -86,11 +87,21 @@ jobs:
         scp -o StrictHostKeyChecking=yes ./prod/nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/nginx/nginx.conf
         echo "Copying .env to server..."
         scp -o StrictHostKeyChecking=yes .env ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/.env
+
+        echo "Copying systemd to server..."
+        scp -o StrictHostKeyChecking=yes ./prod/systemd/certbot-renew.service ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/systemd/certbot-renew.service
+        scp -o StrictHostKeyChecking=yes ./prod/systemd/certbot-renew.timer ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/${{ secrets.SAKURA_USER }}/portfolio/systemd/certbot-renew.timer
     
     - name: SSH into server and deploy
       run: |
         ssh ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }} << 'EOF'
         set -e
+
+        sudo mv /home/${{ secrets.SAKURA_USER }}/portfolio/systemd/certbot-renew.service /etc/systemd/system/certbot-renew.service
+        sudo mv /home/${{ secrets.SAKURA_USER }}/portfolio/systemd/certbot-renew.timer /etc/systemd/system/certbot-renew.timer
+        sudo systemctl enable certbot-renew.timer
+        sudo systemctl start certbot-renew.timer
+
         echo "Logging into GHCR..."
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
@@ -100,7 +111,6 @@ jobs:
         echo "Restarting Docker container..."
         cd /home/${{ secrets.SAKURA_USER }}/portfolio
         docker compose down
-        docker compose up -d
         
         echo "Deployment finished."
         EOF

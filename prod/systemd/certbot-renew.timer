@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs certbot-renew.service daily
+
+[Timer]
+OnBootSec=30d
+OnUnitActiveSec=30d
+Persistent=true
+
+[Install]
+WantedBy=timers.target
