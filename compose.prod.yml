@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: ghcr.io/FRICK-ELDY/portfolio:latest
+    image: ghcr.io/frick-eldy/portfolio:latest
     container_name: portfolio_app
     restart: always
     env_file:
