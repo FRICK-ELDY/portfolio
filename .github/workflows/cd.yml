@@ -41,58 +41,58 @@ jobs:
           file: ./umbrella/Dockerfile
           build-args: MIX_ENV=prod
 
-    deploy:
-      name: Deploy to Production Server
-      runs-on: ubuntu-latest
-      needs: build-and-push
+  deploy:
+    name: Deploy to Production Server
+    runs-on: ubuntu-latest
+    needs: build-and-push
 
-      steps:
-      - name: Setup SSH Agent
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SAKURA_SSH_KEY }}
+    steps:
+    - name: Setup SSH Agent
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SAKURA_SSH_KEY }}
 
-      - name: Setup SSH Known Hosts
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SAKURA_HOST_KEY }}" > ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
+    - name: Setup SSH Known Hosts
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SAKURA_HOST_KEY }}" > ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
 
-      - name: Create .env file
-        run: |
-          cat <<EOF > .env
-          MIX_ENV=prod
-          PORT=${{ secrets.PORT }}
-          PHX_HOST=${{ secrets.PHX_HOST }}
-          SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
-          CERTBOT_EMAIL=${{ secrets.CERTBOT_EMAIL }}
-          EOF
+    - name: Create .env file
+      run: |
+        cat <<EOF > .env
+        MIX_ENV=prod
+        PORT=${{ secrets.PORT }}
+        PHX_HOST=${{ secrets.PHX_HOST }}
+        SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
+        CERTBOT_EMAIL=${{ secrets.CERTBOT_EMAIL }}
+        EOF
 
-      - name: Copy compose files, nginx config, and .env to server
-        run: |
-          mkdir -p ~/home/ubuntu/portfolio
-          echo "Copying docker-compose files to server..."
-          scp -o StrictHostKeyChecking=yes ./compose.prod.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/compose.yml
-          mkdir -p ~/home/ubuntu/portfolio/nginx
-          echo "Copying nginx configuration to server..."
-          scp -o StrictHostKeyChecking=yes ./nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/nginx/nginx.prod.conf
-          echo "Copying .env to server..."
-          scp -o StrictHostKeyChecking=yes .env ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/.env
-      
-      - name: SSH into server and deploy
-        run: |
-          ssh ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }} << 'EOF'
-          set -e
-          echo "Logging into GHCR..."
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: Copy compose files, nginx config, and .env to server
+      run: |
+        mkdir -p ~/home/ubuntu/portfolio
+        echo "Copying docker-compose files to server..."
+        scp -o StrictHostKeyChecking=yes ./compose.prod.yml ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/compose.yml
+        mkdir -p ~/home/ubuntu/portfolio/nginx
+        echo "Copying nginx configuration to server..."
+        scp -o StrictHostKeyChecking=yes ./nginx/nginx.prod.conf ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/nginx/nginx.prod.conf
+        echo "Copying .env to server..."
+        scp -o StrictHostKeyChecking=yes .env ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }}:/home/ubuntu/portfolio/.env
+    
+    - name: SSH into server and deploy
+      run: |
+        ssh ${{ secrets.SAKURA_USER }}@${{ secrets.SAKURA_HOST }} << 'EOF'
+        set -e
+        echo "Logging into GHCR..."
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-          echo "Pulling latest Docker image..."
-          docker pull ghcr.io/${{ github.repository_owner }}/portfolio:latest
+        echo "Pulling latest Docker image..."
+        docker pull ghcr.io/${{ github.repository_owner }}/portfolio:latest
 
-          echo "Restarting Docker container..."
-          cd /home/ubuntu/portfolio
-          docker compose down
-          docker compose up -d
-          
-          echo "Deployment finished."
-          EOF
+        echo "Restarting Docker container..."
+        cd /home/ubuntu/portfolio
+        docker compose down
+        docker compose up -d
+        
+        echo "Deployment finished."
+        EOF
