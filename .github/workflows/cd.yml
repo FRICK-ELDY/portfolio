@@ -106,6 +106,7 @@ jobs:
         echo "Restarting Docker container..."
         cd /home/${{ secrets.SAKURA_USER }}/portfolio
         docker compose down
+        docker compose up -d
         
         echo "Deployment finished."
         EOF
