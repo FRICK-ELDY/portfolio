@@ -14,6 +14,8 @@ CMD ["mix", "phx.server"]
 # 本番用ビルドステージ
 FROM base as prod_build
 RUN mix deps.get --only prod
+RUN mix assets.deploy
+RUN MIX_ENV=prod mix phx.digest
 RUN MIX_ENV=prod mix compile
 RUN MIX_ENV=prod mix release  
 # 本番用ランナーステージ（軽量イメージ）
