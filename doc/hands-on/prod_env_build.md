@@ -77,14 +77,3 @@ docker version
 ```bash
 sudo usermod -aG docker ubuntu
 ```
-## プロジェクト配置、Dockerコンテナ起動
-### ソースコード配置
-```bash
-cd /home/ubuntu
-git clone https://github.com/FRICK-ELDY/portfolio.git
-cd portfolio
-```
-### Docker Compose 実行
-```bash
-docker compose --profile prod up -d --build
-```
