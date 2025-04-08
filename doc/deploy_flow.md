@@ -1,16 +1,30 @@
-## デプロイフロー
+## 🚀 CD（継続的デプロイ）の概要
 
-1. **GitHub Actions**  
-   - プッシュ → Pull Request → GitHub Actions 実行
-     - `mix test` によるユニットテスト
-     - `mix dialyzer` による型チェック
-     - `mix format --check-formatted` によるコード整形チェック
-     - 成功したらデプロイ（SSH or Docker Registry等を介して）
-2. **本番サーバーのDocker更新**  
-   - docker-compose pull → docker-compose up -d
-3. **ドメイン設定・SSL証明書 (certbot)**
-   - `frick-eldy.com` の DNS 設定: Cloudflare 上で A レコードを 160.16.52.79 に向ける
-   - Nginx + certbot を使用して SSL 証明書を取得 (Let’s Encrypt)
-4. **サービス起動管理 (systemd)**  
-   - Phoenix アプリまたは Docker を systemd で監視
-   - 障害時のリスタートや通知の設定
+本リポジトリでは、`main` ブランチへのマージまたは CI 完了後、自動的に本番環境へデプロイが行われるよう GitHub Actions を使用した CD（継続的デプロイ）を構成しています。
+
+### ワークフローの流れ
+
+1. `main` ブランチへ push、または CI 成功後にトリガー
+2. Docker イメージをビルドして GHCR（GitHub Container Registry）へ Push
+3. SSH 経由で本番サーバへデプロイファイルと環境変数を転送
+4. Docker Compose によるコンテナの再起動で本番反映
+
+### CDジョブ一覧
+
+| ジョブ名              | 目的・処理内容                                                                 | 良い点                                                                 |
+|-----------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `build-and-push`      | Docker イメージのビルドと GHCR への push                                     | - `buildx`対応で高速ビルド<br>- GHCR連携による信頼性の高いレジストリ管理 |
+| `deploy`              | 本番サーバへのSSH接続と、環境構築・再デプロイ                               | - SSH鍵とKnown Hostsを安全に管理<br>- `.env`やnginx設定の自動配置       |
+|                       |                                                                              | - `systemd`設定の自動反映<br>- `docker compose`での確実な再起動         |
+
+### セキュリティ・再現性の工夫
+
+| 項目                  | 内容                                                                 |
+|-----------------------|----------------------------------------------------------------------|
+| シークレット管理       | `GITHUB_TOKEN`, `SAKURA_SSH_KEY` などは GitHub Secrets により安全に管理 |
+| コンテナイメージの運用 | GHCR上に `latest` タグで一元管理し、常に最新の状態を保持               |
+| 本番環境の統一        | `.env`, nginx設定, systemd設定ファイルを含めて毎回完全に再構成          |
+
+---
+
+✅ この構成により、**CIでのコード品質担保 → 自動デプロイによる即時反映**が可能になっており、開発から運用までの一貫性と信頼性が確保されています。
