@@ -5,4 +5,4 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-docker compose run --rm certbot renew --post-hook "docker compose exec nginx nginx -s reload"
+ExecStart=docker compose run --rm certbot renew --post-hook "docker compose exec nginx nginx -s reload"

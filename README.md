@@ -35,6 +35,8 @@
   - 取得ドメイン: [frick-eldy.com](https://frick-eldy.com)
   - 年額: 10.44ドル
   - DNS設定: AレコードにIPアドレスを設定 {IPADDRESS}
+  - カスタム SSL/TLS: フル (厳密)
+    - ブラウザ(HTTPS) ⇔ Cloudflare(HTTPS) ⇔ Nginx(HTTPS終端)
 
 ## CI/CD (GitHub Actions)
 - mix format (コード整形)
