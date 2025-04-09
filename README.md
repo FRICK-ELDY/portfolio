@@ -1,13 +1,15 @@
 ## 概要
 - 目的: [FRICKのポートフォリオサイト](https://frick-eldy.com)を構築する為のプロジェクト
 - 主要技術:
-  - `Elixir/Phoenix`: Webアプリケーションフレームワーク
-  - `Ash Framework`: データベースのCRUD操作や認証/認可の管理
+  - `GitHub Actions`: CI/CDの構築と自動化
+  - `Systemd`: サービスの起動管理と自動化
   - `Docker`: アプリケーションのコンテナ化
-  - `Nginx`: リバースプロキシおよびSSL対応
-  - `Certbot`: SSL証明書の管理
-  - `Systemd`: サービスの起動管理
-  - `GitHub Actions`: CI/CDの構築
+    - `Nginx`: リバースプロキシおよびSSL対応
+    - `Certbot`: SSL証明書の管理
+    - `Elixir/Phoenix`: Webアプリケーションフレームワーク、Umbrellaプロジェクトを使用
+      - `Tailwind CSS`: CSSフレームワーク
+      - `Ash Framework`: データベースのCRUD操作や認証/認可の管理
+      - `stripity_stripe`: Stripeの決済システム
 
 ## 開発環境
 - OS: `Ubuntu` | `Mac` | `Windows + WSL2`
