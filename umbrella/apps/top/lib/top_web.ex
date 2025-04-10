@@ -42,7 +42,7 @@ defmodule TopWeb do
         formats: [:html, :json],
         layouts: [html: TopWeb.Layouts]
 
-      use Gettext, backend: TopWeb.Gettext
+      use Gettext, backend: Shared.Gettext
 
       import Plug.Conn
 
@@ -83,7 +83,7 @@ defmodule TopWeb do
   defp html_helpers do
     quote do
       # Translation
-      use Gettext, backend: TopWeb.Gettext
+      use Gettext, backend: Shared.Gettext
 
       # HTML escaping functionality
       import Phoenix.HTML

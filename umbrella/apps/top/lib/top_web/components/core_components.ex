@@ -17,7 +17,7 @@ defmodule TopWeb.CoreComponents do
   Icons are provided by [heroicons](https://heroicons.com). See `icon/1` for usage.
   """
   use Phoenix.Component
-  use Gettext, backend: TopWeb.Gettext
+  use Gettext, backend: Shared.Gettext
 
   alias Phoenix.LiveView.JS
 
@@ -75,7 +75,7 @@ defmodule TopWeb.CoreComponents do
                   phx-click={JS.exec("data-cancel", to: "##{@id}")}
                   type="button"
                   class="-m-3 flex-none p-3 opacity-20 hover:opacity-40"
-                  aria-label={gettext("close")}
+                  aria-label={dgettext("top", "close")}
                 >
                   <.icon name="hero-x-mark-solid" class="h-5 w-5" />
                 </button>
@@ -129,7 +129,11 @@ defmodule TopWeb.CoreComponents do
         {@title}
       </p>
       <p class="mt-2 text-sm leading-5">{msg}</p>
-      <button type="button" class="group absolute top-1 right-1 p-2" aria-label={gettext("close")}>
+      <button
+        type="button"
+        class="group absolute top-1 right-1 p-2"
+        aria-label={dgettext("top", "close")}
+      >
         <.icon name="hero-x-mark-solid" class="h-5 w-5 opacity-40 group-hover:opacity-70" />
       </button>
     </div>
@@ -149,29 +153,29 @@ defmodule TopWeb.CoreComponents do
   def flash_group(assigns) do
     ~H"""
     <div id={@id}>
-      <.flash kind={:info} title={gettext("Success!")} flash={@flash} />
-      <.flash kind={:error} title={gettext("Error!")} flash={@flash} />
+      <.flash kind={:info} title={dgettext("top", "Success!")} flash={@flash} />
+      <.flash kind={:error} title={dgettext("top", "Error!")} flash={@flash} />
       <.flash
         id="client-error"
         kind={:error}
-        title={gettext("We can't find the internet")}
+        title={dgettext("top", "We can't find the internet")}
         phx-disconnected={show(".phx-client-error #client-error")}
         phx-connected={hide("#client-error")}
         hidden
       >
-        {gettext("Attempting to reconnect")}
+        {dgettext("top", "Attempting to reconnect")}
         <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
       </.flash>
 
       <.flash
         id="server-error"
         kind={:error}
-        title={gettext("Something went wrong!")}
+        title={dgettext("top", "Something went wrong!")}
         phx-disconnected={show(".phx-server-error #server-error")}
         phx-connected={hide("#server-error")}
         hidden
       >
-        {gettext("Hang in there while we get back on track")}
+        {dgettext("top", "Hang in there while we get back on track")}
         <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
       </.flash>
     </div>
@@ -481,7 +485,7 @@ defmodule TopWeb.CoreComponents do
           <tr>
             <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal">{col[:label]}</th>
             <th :if={@action != []} class="relative p-0 pb-4">
-              <span class="sr-only">{gettext("Actions")}</span>
+              <span class="sr-only">{dgettext("top", "Actions")}</span>
             </th>
           </tr>
         </thead>
@@ -663,9 +667,9 @@ defmodule TopWeb.CoreComponents do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(TopWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(Shared.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(TopWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(Shared.Gettext, "errors", msg, opts)
     end
   end
 
