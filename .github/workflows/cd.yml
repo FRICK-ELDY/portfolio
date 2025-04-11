@@ -77,6 +77,9 @@ jobs:
         PHX_HOST=${{ secrets.PHX_HOST }}
         SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
         CERTBOT_EMAIL=${{ secrets.CERTBOT_EMAIL }}
+        POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+        DATABASE_URL=${{ secrets.DATABASE_URL }}
         EOF
 
     - name: Copy compose files, nginx config, and .env to server

@@ -6,6 +6,7 @@
   - `Docker`: アプリケーションのコンテナ化
     - `Nginx`: リバースプロキシおよびSSL対応
     - `Certbot`: SSL証明書の管理
+    - `PostgreSQL`: データベース管理システム
     - `Elixir/Phoenix`: Webアプリケーションフレームワーク、Umbrellaプロジェクトを使用
       - `Tailwind CSS`: CSSフレームワーク
       - `Ash Framework`: データベースのCRUD操作や認証/認可の管理
