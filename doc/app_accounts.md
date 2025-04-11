@@ -20,3 +20,21 @@ accounts/
 │           └── *.exs
 ├── mix.exs
 ```
+
+umbrellaプロジェクトのルートディレクトリで以下を実行します。
+```
+mix new apps/accounts
+cd apps/accounts
+mkdir -p config
+toutch config.exs
+
+mkdir -p priv/repo/migrations
+mix ash_postgres.generate_migrations add_user_auth --apis Accounts.Api
+mix ecto.create
+mix ecto.migrate
+```
+
+
+```
+mix ash_postgres.generate_migrations Accounts --app accounts
+```
