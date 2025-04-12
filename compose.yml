@@ -29,6 +29,7 @@ services:
       - ./umbrella:/app
     working_dir: /app
     environment:
+      MIX_ENV: dev
       DATABASE_URL: ${DATABASE_URL_DEV}
     depends_on:
       - db
