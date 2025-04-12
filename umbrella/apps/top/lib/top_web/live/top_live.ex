@@ -4,8 +4,12 @@ defmodule TopWeb.TopLive do
   def mount(_params, _session, socket) do
     Gettext.put_locale(Shared.Gettext, "ja")
 
-    {:ok,
-     assign(socket, :message, dgettext("top", "Peace of mind from prototype to production."))}
+    socket =
+      socket
+      |> assign(:page_title, "Top")
+      |> assign(:message, dgettext("top", "Peace of mind from prototype to production."))
+
+    {:ok, socket}
   end
 
   def render(assigns) do
