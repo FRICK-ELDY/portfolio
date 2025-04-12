@@ -1,6 +1,8 @@
 defmodule TopWeb.Router do
   use TopWeb, :router
 
+  import Phoenix.LiveView.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -18,6 +20,7 @@ defmodule TopWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/p", PageLive
   end
 
   # Other scopes may use custom stacks.

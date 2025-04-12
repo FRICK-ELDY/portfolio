@@ -38,3 +38,9 @@ mix ecto.migrate
 ```
 mix ash_postgres.generate_migrations Accounts --app accounts
 ```
+
+
+docker compose down --volumes --remove-orphans
+docker builder prune --all --force
+docker compose build --no-cache
+docker compose up
