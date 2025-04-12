@@ -8,7 +8,6 @@ defmodule Top.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      TopWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:top, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Top.PubSub},
       # Start the Finch HTTP client for sending emails
