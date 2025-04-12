@@ -1,8 +1,11 @@
-defmodule TopWeb.PageLive do
+defmodule TopWeb.TopLive do
   use TopWeb, :live_view
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :message, "ようこそ！")}
+    Gettext.put_locale(Shared.Gettext, "ja")
+
+    {:ok,
+     assign(socket, :message, dgettext("top", "Peace of mind from prototype to production."))}
   end
 
   def render(assigns) do

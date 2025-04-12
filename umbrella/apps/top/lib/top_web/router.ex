@@ -19,8 +19,7 @@ defmodule TopWeb.Router do
   scope "/", TopWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
-    live "/p", PageLive
+    live "/", TopLive
   end
 
   # Other scopes may use custom stacks.
