@@ -62,7 +62,7 @@ defmodule TopWeb do
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/top_web/live_html",
+        root: "lib/top_web/live_view_html",
         namespace: TopWeb
 
       import Phoenix.Controller,
