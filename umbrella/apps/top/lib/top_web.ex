@@ -59,6 +59,22 @@ defmodule TopWeb do
     end
   end
 
+  def view do
+    quote do
+      use Phoenix.View,
+        root: "lib/top_web/live_html",
+        namespace: TopWeb
+
+      import Phoenix.Controller,
+        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+
+      use Phoenix.Component
+      use Gettext, backend: Shared.Gettext
+
+      unquote(html_helpers())
+    end
+  end
+
   def live_component do
     quote do
       use Phoenix.LiveComponent
