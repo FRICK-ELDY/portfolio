@@ -1,11 +1,11 @@
 defmodule TopWeb.Router do
   use TopWeb, :router
-
   import Phoenix.LiveView.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
+    plug Shared.Plugs.LocaleStore
     plug :fetch_live_flash
     plug :put_root_layout, html: {TopWeb.Layouts, :root}
     plug :protect_from_forgery
@@ -18,8 +18,7 @@ defmodule TopWeb.Router do
 
   scope "/", TopWeb do
     pipe_through :browser
-
-    live "/", TopLive
+    localized_routes()
   end
 
   # Other scopes may use custom stacks.
