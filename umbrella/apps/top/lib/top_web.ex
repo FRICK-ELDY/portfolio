@@ -22,7 +22,7 @@ defmodule TopWeb do
   def router do
     quote do
       use Phoenix.Router, helpers: false
-
+      use Shared.Helpers, :router
       # Import common connection and controller functions to use in pipelines
       import Plug.Conn
       import Phoenix.Controller
@@ -62,7 +62,7 @@ defmodule TopWeb do
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/top_web/live_view_html",
+        root: "lib/top_web/live_view/html",
         namespace: TopWeb
 
       import Phoenix.Controller,

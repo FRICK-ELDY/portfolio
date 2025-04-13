@@ -3,8 +3,9 @@ defmodule TopWeb.TopLive do
 
   def render(assigns), do: Phoenix.View.render(TopWeb.TopLiveView, "main.html", assigns)
 
-  def mount(_params, _session, socket) do
-    Gettext.put_locale(Shared.Gettext, "ja")
+  def mount(params, session, socket) do
+    locale = params["locale"] || session["locale"]
+    Gettext.put_locale(Shared.Gettext, locale)
 
     socket =
       socket

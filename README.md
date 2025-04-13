@@ -7,10 +7,10 @@
     - `Nginx`: リバースプロキシおよびSSL対応
     - `Certbot`: SSL証明書の管理
     - `PostgreSQL`: データベース管理システム
-    - `Elixir/Phoenix`: Webアプリケーションフレームワーク、Umbrellaプロジェクトを使用
+    - `Elixir/Phoenix`: Webアプリケーションフレームワーク
       - `Tailwind CSS`: CSSフレームワーク
       - `Ash Framework`: データベースのCRUD操作や認証/認可の管理
-      - `stripity_stripe`: Stripeの決済システム
+      - `Stripe`: `stripity_stripe`を使った決済システム
 
 ## 開発環境
 - OS: `Ubuntu` | `Mac` | `Windows + WSL2`
@@ -24,7 +24,7 @@
 
 ## リポジトリ
 - URL: https://github.com/FRICK-ELDY/portfolio
-- プルリクエスト必須ルール: コミットは必ずプルリク → レビュー → マージ のフローで実行
+- ルール: プルリクエスト必須
 - ghcr.ioの利用: Read and write permissions
 
 ## 本番環境
@@ -47,7 +47,7 @@
 | `compile`    | Elixirコードのコンパイルと警告チェック            | - 警告をエラーとして扱う<br>- 依存関係の適切な取得             |
 | `dialyzer`   | 型解析と型安全性の確認                             | - 型チェック<br>- 未到達コードのチェック      |
 | `format`     | コードフォーマットの検査                           | - コードスタイルの統一<br>- 自動整形     |
-| `credo`      | 静的解析によるコード品質チェック                   | - `--strict`モードで厳格なスタイルチェック<br>- 潜在的な問題の発見 |
+| `credo`      | 静的解析によるコード品質チェック                   | - 厳格なスタイルチェック<br>- 潜在的な問題の発見 |
 | `test`       | テストコードの実行                                 | - バグ防止<br>                        |
 - [デプロイフロー](./doc/deploy_flow.md)
 
