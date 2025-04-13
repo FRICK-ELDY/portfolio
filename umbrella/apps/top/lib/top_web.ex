@@ -52,9 +52,7 @@ defmodule TopWeb do
 
   def live_view do
     quote do
-      use Phoenix.LiveView,
-        layout: {TopWeb.Layouts, :app}
-
+      use Phoenix.LiveView
       unquote(html_helpers())
     end
   end
