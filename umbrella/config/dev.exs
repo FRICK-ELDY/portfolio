@@ -48,7 +48,7 @@ config :top, TopWeb.Endpoint,
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"../shared/priv/gettext/.*(po)$",
-      ~r"lib/top_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/top_web/(controllers|live|live_view|components)/.*(ex|heex)$"
     ]
   ]
 
