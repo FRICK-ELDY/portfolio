@@ -9,6 +9,7 @@ RUN mix local.hex --force && mix local.rebar --force
 FROM base as dev  
 RUN apt-get update && apt-get install -y inotify-tools  
 RUN mix deps.get
+RUN mix compile
 RUN mix assets.deploy
 CMD ["mix", "phx.server"]
 
