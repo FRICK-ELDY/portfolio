@@ -1,4 +1,4 @@
-defmodule TopWeb.TopLiveView do
+defmodule TopWeb.AboutLiveView do
   use TopWeb, :view
 
   @gettext_domain "top"

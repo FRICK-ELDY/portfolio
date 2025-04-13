@@ -7,7 +7,7 @@ defmodule Shared.Helpers.Router do
     routes =
       for path <- paths do
         quote do
-          live(unquote(path), TopLive)
+          live(unquote(path), AboutLive)
         end
       end
 
