@@ -10,7 +10,13 @@ defmodule TopWeb.AboutLive do
       images: [
         %{title: "月華蝶", url: "./images/world/moonflower_butterfly.png"},
         %{title: "ステラ", url: "./images/world/stela.png"},
-        %{title: "幻想的な世界に浸る", url: "./images/world/you_in_a_fantastic_world.png"}
+        %{title: "幻想的な世界に浸る", url: "./images/world/you_in_a_fantastic_world.png"},
+        %{title: "銀河", url: "./images/world/galaxy.png"},
+        %{title: "鳥かごの癒し", url: "./images/world/bird_cage_healing.png"},
+        %{title: "屋上での思い出", url: "./images/world/memories_on_the rooftop.png"},
+        %{title: "クジラと波", url: "./images/world/whale_and_waves.png"},
+        %{title: "夕暮れと共に", url: "./images/world/with_the_dusk.png"},
+        %{title: "4-7-8 Deep Breath", url: "./images/world/4-7-8_Deep_Breath.png"}
       ]
     },
     %{

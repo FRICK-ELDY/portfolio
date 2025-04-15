@@ -1,30 +1,68 @@
-## 🚀 CD（継続的デプロイ）の概要
+## 🚀 デプロイフロー
 
-本リポジトリでは、`main` ブランチへのマージまたは CI 完了後、自動的に本番環境へデプロイが行われるよう GitHub Actions を使用した CD（継続的デプロイ）を構成しています。
+本プロジェクトでは、GitHub Actionsを使用して自動デプロイを実現しています。以下はデプロイフローの概要です。
 
-### ワークフローの流れ
+### フロー概要
 
-1. `main` ブランチへ push、または CI 成功後にトリガー
-2. Docker イメージをビルドして GHCR（GitHub Container Registry）へ Push
-3. SSH 経由で本番サーバへデプロイファイルと環境変数を転送
-4. Docker Compose によるコンテナの再起動で本番反映
+1. **コードの変更を`main`ブランチにプッシュ**  
+   - プッシュまたはマージがトリガーとなり、CI/CDパイプラインが開始されます。
 
-### CDジョブ一覧
+2. **Dockerイメージのビルドとプッシュ**  
+   - GitHub Actionsの`build-and-push`ジョブが実行され、以下の処理を行います:
+     - ソースコードをチェックアウト
+     - Docker Buildxをセットアップ
+     - Dockerイメージをビルドし、GitHub Container Registry (GHCR) にプッシュ
 
-| ジョブ名              | 目的・処理内容                                                                 | 良い点                                                                 |
-|-----------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `build-and-push`      | Docker イメージのビルドと GHCR への push                                     | - `buildx`対応で高速ビルド<br>- GHCR連携による信頼性の高いレジストリ管理 |
-| `deploy`              | 本番サーバへのSSH接続と、環境構築・再デプロイ                               | - SSH鍵とKnown Hostsを安全に管理<br>- `.env`やnginx設定の自動配置       |
-|                       |                                                                              | - `systemd`設定の自動反映<br>- `docker compose`での確実な再起動         |
+3. **本番サーバへのデプロイ**  
+   - `deploy`ジョブが実行され、以下の処理を行います:
+     - SSHを使用して本番サーバに接続
+     - 必要なフォルダや設定ファイル（`.env`, `compose.yml`, `nginx.conf`など）をサーバにコピー
+     - GHCRから最新のDockerイメージをプル
+     - Docker Composeを使用してコンテナを再起動
 
-### セキュリティ・再現性の工夫
+4. **デプロイ完了**  
+   - サーバ上でアプリケーションが再起動され、最新の変更が反映されます。
 
-| 項目                  | 内容                                                                 |
-|-----------------------|----------------------------------------------------------------------|
-| シークレット管理       | `GITHUB_TOKEN`, `SAKURA_SSH_KEY` などは GitHub Secrets により安全に管理 |
-| コンテナイメージの運用 | GHCR上に `latest` タグで一元管理し、常に最新の状態を保持               |
-| 本番環境の統一        | `.env`, nginx設定, systemd設定ファイルを含めて毎回完全に再構成          |
+### 使用しているGitHub Actionsジョブ
 
----
+- **`build-and-push`**  
+  - Dockerイメージをビルドし、GHCRにプッシュします。
+  - 使用アクション:
+    - `actions/checkout@v3`
+    - `docker/setup-buildx-action@v3`
+    - `docker/login-action@v3`
+    - `docker/build-push-action@v5`
 
-✅ この構成により、**CIでのコード品質担保 → 自動デプロイによる即時反映**が可能になっており、開発から運用までの一貫性と信頼性が確保されています。
+- **`deploy`**  
+  - 本番サーバに接続し、アプリケーションをデプロイします。
+  - 使用アクション:
+    - `actions/checkout@v3`
+    - `webfactory/ssh-agent@v0.5.3`
+
+### セキュリティと再現性
+
+- **シークレット管理**  
+  - `GITHUB_TOKEN`, `SAKURA_SSH_KEY`, `SAKURA_HOST_KEY` などの機密情報はGitHub Secretsで安全に管理しています。
+
+- **環境の統一**  
+  - `.env`ファイルや`nginx`設定、`systemd`設定を毎回再構成することで、環境の一貫性を確保しています。
+
+- **コンテナイメージの管理**  
+  - GHCR上で`latest`タグを使用して、常に最新のDockerイメージを運用しています。
+
+### デプロイコマンド例
+
+以下は手動でデプロイを実行する場合のコマンド例です:
+
+```bash
+# 本番サーバにSSH接続
+ssh sakura_user@sakura_host
+
+# 最新のDockerイメージをプル
+docker pull ghcr.io/frick-eldy/portfolio:latest
+
+# コンテナを再起動
+cd /home/sakura_user/portfolio
+docker compose down
+docker compose up -d
+```

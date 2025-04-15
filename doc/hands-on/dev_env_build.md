@@ -50,11 +50,17 @@ touch nginx.dev.conf
 touch nginx.prod.conf
 ```
 ※ファイルを一元化していないのは開発環境と本番環境を明確に区別する為。
+
 ※また、confファイルの条件分岐を判断できない環境がある可能性があるので安全性の為。
+
 `./nginx/nginx.dev.conf`
+
 https://github.com/FRICK-ELDY/portfolio/blob/main/nginx/nginx.dev.conf
+
 `./nginx/nginx.prod.conf`
+
 https://github.com/FRICK-ELDY/portfolio/blob/main/nginx/nginx.prod.conf
+
 ## docker composeの設定
 ```bash
 cd ./
@@ -63,6 +69,9 @@ cd ./umbrella
 touch Dockerfile
 ```
 `./compose.yml`
+
 https://github.com/FRICK-ELDY/portfolio/blob/main/compose.yml
+
 `./umbrella/Dockerfile`
+
 https://github.com/FRICK-ELDY/portfolio/blob/main/umbrella/Dockerfile
