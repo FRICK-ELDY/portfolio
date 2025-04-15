@@ -20,15 +20,15 @@ project-root/
 │   ├── apps/
 │   │   ├── shared/        # 共通ロジック・Gettext・バリデーションなど
 │   │   ├── top/           # トップページ・静的UI（LiveView）
-│   │   ├── accounts/      # アカウント管理（Ash）
-│   │   ├── inquiry/       # お仕事依頼フォーム（依頼の受付・管理）
-│   │   │   └── Inquiry    # Ash Resource: name, email, message, statusなど
+│   │   ├── inquiry/       # お仕事依頼フォーム（依頼の受付・管理）(Ecto)
+│   │   │   ├── Inquiry    # name, email, message, statusなど
 │   │   │   └── InquiryWeb # LiveView/HTMLでフォームや一覧表示
+│   │   ├── accounts/      # アカウント管理（Ash）
 │   │   ├── payment/       # Stripe決済など（Ash）
-│   │   ├── subscription/  # プラン管理、契約状態、LiveView画面、Patronページ
-│   │   ├── blog/          # 
+│   │   ├── patron/        # プラン管理、契約状態、LiveView画面、Patronページ
 │   │   ├── shop/          # 商品閲覧・カート・購入体験（LiveView + Ash）
 │   │   ├── download/      # 購入済みデータのダウンロード
+│   │   ├── blog/          # Earmark + NimblePublisher
 │   │
 ├── doc/
 │ 
