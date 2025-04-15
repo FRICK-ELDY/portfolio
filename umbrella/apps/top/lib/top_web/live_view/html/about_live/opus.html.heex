@@ -10,7 +10,7 @@
           style={"transform: translateX(-#{100 * set.current_index}%)"}
         >
           <%= for img <- set.images do %>
-            <div class="flex-shrink-0 w-full h-[540px]">
+            <div class="flex-shrink-0 w-full h-[280px] sm:h-[360px] md:h-[420px] lg:h-[540px]">
               <h1 class="text-2xl font-bold text-gray-100 mb-2">{img.title}</h1>
               <img src={img.url} alt="slide" class="w-full h-full object-contain rounded-lg" />
             </div>
