@@ -25,7 +25,29 @@
         >
           前へ
         </button>
-        <div class="mt-4 flex justify-center gap-2">
+
+        <div class="block sm:hidden mt-4 flex justify-center gap-2">
+          <% start_idx = max(set.current_index - 1, 0)
+          end_idx = min(set.current_index + 1, length(set.images) - 1) %>
+          <%= for slide_idx <- start_idx..end_idx do %>
+            <button
+              phx-click="jump"
+              phx-value-set_index={i}
+              phx-value-slide_index={slide_idx}
+              class={
+                if slide_idx == set.current_index do
+                  "px-2 py-1 bg-blue-600 text-white rounded"
+                else
+                  "px-2 py-1 bg-gray-600 text-white rounded hover:bg-gray-500"
+                end
+              }
+            >
+              {slide_idx + 1}
+            </button>
+          <% end %>
+        </div>
+
+        <div class="hidden sm:block mt-4 flex justify-center gap-2">
           <%= for slide_idx <- 0..(length(set.images) - 1) do %>
             <button
               phx-click="jump"
