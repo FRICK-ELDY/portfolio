@@ -23,9 +23,17 @@ defmodule TopWeb.AboutLive do
       name: "アバター",
       current_index: 0,
       images: [
-        %{title: "moonflower_butterfly", url: "./images/world/moonflower_butterfly.png"},
-        %{title: "stela", url: "./images/world/stela.png"},
-        %{title: "you_in_a_fantastic_world", url: "./images/world/you_in_a_fantastic_world.png"}
+        %{title: "博麗霊夢", url: "./images/avatar/reimu.png"},
+        %{title: "霧雨魔理沙", url: "./images/avatar/marisa.png"},
+        %{title: "ルーミア", url: "./images/avatar/ru-mia.png"},
+        %{title: "チルノ", url: "./images/avatar/chiruno.png"},
+        %{title: "紅美鈴", url: "./images/avatar/meirin.png"},
+        %{title: "十六夜咲夜", url: "./images/avatar/sakuya.png"},
+        %{title: "レミリア・スカーレット", url: "./images/avatar/remiria.png"},
+        %{title: "パチュリー・ノーレッジ", url: "./images/avatar/patyuri.png"},
+        %{title: "フランドール・スカーレット", url: "./images/avatar/huran.png"},
+        %{title: "魅魔", url: "./images/avatar/mima.png"},
+        %{title: "因幡てゐ", url: "./images/avatar/tewi.png"}
       ]
     }
   ]
