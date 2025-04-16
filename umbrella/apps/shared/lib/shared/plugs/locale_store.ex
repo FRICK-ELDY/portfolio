@@ -7,7 +7,11 @@ defmodule Shared.Plugs.LocaleStore do
   def init(opts), do: opts
 
   def call(%Plug.Conn{params: %{"locale" => locale}} = conn, _opts) do
-    put_session(conn, :locale, locale)
+    if locale in Shared.Locale.excluded_paths() do
+      put_session(conn, :locale, locale)
+    else
+      conn
+    end
   end
 
   def call(conn, _opts), do: conn
