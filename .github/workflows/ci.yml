@@ -100,9 +100,9 @@ jobs:
           path: |
             _build
             priv/plts
-          key: dialyzer-${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}
+          key: dialyzer-${{ runner.os }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ steps.setup-beam.outputs.otp-version }}-${{ hashFiles('mix.lock') }}
           restore-keys: |
-            dialyzer-${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-
+            dialyzer-${{ runner.os }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ steps.setup-beam.outputs.otp-version }}-
       - name: dialyzer
         run: |
           cd $GITHUB_WORKSPACE/umbrella
