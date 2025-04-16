@@ -25,6 +25,7 @@ services:
       - .env
     ports:
       - "4000:4000"
+      - "4001:4001"
     volumes:
       - ./umbrella:/app
     working_dir: /app
@@ -56,6 +57,7 @@ services:
       - .env
     ports:
       - "4000:4000"
+      - "4001:4001"
     environment:
       DATABASE_URL: ${DATABASE_URL}
     depends_on:

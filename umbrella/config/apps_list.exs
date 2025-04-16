@@ -1,4 +1,5 @@
 [
   :shared,
-  :top
+  :top,
+  :inquiry
 ]

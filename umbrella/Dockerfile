@@ -34,7 +34,6 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 COPY --from=prod_build /app/umbrella/_build/prod/rel/portfolio ./
-ENV PHX_SERVER=true
 ENV PORT=4000
 EXPOSE 4000
 CMD ["bin/portfolio", "start"]

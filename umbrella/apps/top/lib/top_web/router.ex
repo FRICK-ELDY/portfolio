@@ -19,7 +19,7 @@ defmodule TopWeb.Router do
 
   scope "/", TopWeb do
     pipe_through :browser
-    localized_routes()
+    localized_routes(TopWeb)
   end
 
   # Other scopes may use custom stacks.
