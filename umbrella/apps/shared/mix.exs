@@ -27,7 +27,10 @@ defmodule Shared.MixProject do
     [
       {:gettext, "~> 0.26"},
       {:swoosh, "~> 1.18"},
-      {:hackney, "~> 1.18"}
+      {:hackney, "~> 1.18"},
+      {:phoenix, "~> 1.7.20"},
+      {:phoenix_html, "~> 4.1"},
+      {:phoenix_view, "~> 2.0"}
     ]
   end
 end

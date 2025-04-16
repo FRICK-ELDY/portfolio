@@ -1,4 +1,4 @@
-{render("header.html", assigns)}
+{Phoenix.View.render(Shared.HtmlView, "header.html", assigns)}
 <main class="px-4 py-3 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-2xl">
     <.flash_group flash={@flash} />
