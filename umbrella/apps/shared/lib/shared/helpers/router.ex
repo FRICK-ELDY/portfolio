@@ -2,12 +2,15 @@ defmodule Shared.Helpers.Router do
   @moduledoc "Routing Macro Collections"
 
   defmacro localized_routes do
-    paths = ["/", "/:locale"]
+    paths = [
+      {"/", AboutLive},
+      {"/:locale", AboutLive}
+    ]
 
     routes =
-      for path <- paths do
+      for {path, mod} <- paths do
         quote do
-          live(unquote(path), AboutLive)
+          live(unquote(path), unquote(mod))
         end
       end
 
