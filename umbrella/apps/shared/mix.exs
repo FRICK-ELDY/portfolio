@@ -25,7 +25,9 @@ defmodule Shared.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:gettext, "~> 0.26"}
+      {:gettext, "~> 0.26"},
+      {:swoosh, "~> 1.18"},
+      {:hackney, "~> 1.18"}
     ]
   end
 end
