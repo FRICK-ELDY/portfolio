@@ -30,6 +30,7 @@ defmodule Shared.MixProject do
       {:hackney, "~> 1.18"},
       {:phoenix, "~> 1.7.20"},
       {:phoenix_html, "~> 4.1"},
+      {:phoenix_live_view, "~> 1.0.9"},
       {:phoenix_view, "~> 2.0"}
     ]
   end

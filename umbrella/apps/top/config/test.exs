@@ -1,7 +1,7 @@
 import Config
 
 config :top, TopWeb.Endpoint,
-  http: [ip: {127, 0, 0, 1}, port: 4002],
+  http: [ip: {127, 0, 0, 1}, port: 4010],
   secret_key_base: "olmo8RWcJoQ665rw1tU5yIAYZu1Wn/mVeHd2tgZk5V0jTMVcRecd2vY9iwxpNiwP",
   server: false
 

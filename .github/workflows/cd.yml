@@ -73,6 +73,7 @@ jobs:
       run: |
         cat <<EOF > .env
         MIX_ENV=prod
+        PHX_SERVER=true
         PORT=${{ secrets.PORT }}
         PHX_HOST=${{ secrets.PHX_HOST }}
         SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
