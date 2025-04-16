@@ -1,6 +1,9 @@
 # 共通ベースステージ
 FROM elixir:1.18.2 as base
-RUN apt-get update && apt-get install -y bash git vim sudo curl && apt-get -y upgrade
+RUN apt-get update && \
+    apt-get install -y bash git vim sudo curl build-essential \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 WORKDIR /app
 COPY . .  
 WORKDIR /app/umbrella
@@ -10,14 +13,16 @@ FROM base as dev
 RUN apt-get update && apt-get install -y inotify-tools  
 RUN mix deps.get
 RUN mix compile
+RUN find apps -type f -path "*/assets/package.json" -execdir npm install \;
 RUN mix assets.deploy
 CMD ["mix", "phx.server"]
 
 # 本番用ビルドステージ
 FROM base as prod_build
 RUN mix deps.get --only prod
-RUN MIX_ENV=prod mix assets.deploy
 RUN MIX_ENV=prod mix compile
+RUN find apps -type f -path "*/assets/package.json" -execdir npm install \;
+RUN MIX_ENV=prod mix assets.deploy
 RUN MIX_ENV=prod mix release  
 # 本番用ランナーステージ（軽量イメージ）
 FROM ubuntu:22.04 as prod
