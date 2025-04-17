@@ -8,11 +8,11 @@ let csrfToken = document
   .querySelector("meta[name='csrf-token']")
   ?.getAttribute("content") || ""
 
-let liveSocketPath = "/inquiry_live"
+let liveSocketPath = "/inquiry/live"
 if (window.location.pathname.startsWith("/")) {
   liveSocketPath = "/top/live"
 }
-let liveSocket = new LiveSocket("/inquiry_live", Socket, {
+let liveSocket = new LiveSocket("/inquiry/live", Socket, {
   params: () => ({ _csrf_token: csrfToken }),
 })
 
