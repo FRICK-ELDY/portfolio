@@ -18,7 +18,7 @@ defmodule Shared.Plugs.ValidateLocale do
 
       true ->
         conn
-        |> Phoenix.Controller.redirect(to: "/")
+        |> send_resp(404, "Not Found")
         |> halt()
     end
   end
