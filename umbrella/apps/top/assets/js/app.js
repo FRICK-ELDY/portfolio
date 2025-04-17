@@ -25,7 +25,7 @@ import topbar from "../vendor/topbar"
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocketPath = "/top/live"
 if (window.location.pathname.startsWith("/inquiry")) {
-  liveSocketPath = "/inquiry_live"
+  liveSocketPath = "/inquiry/live"
 }
 let liveSocket = new LiveSocket(liveSocketPath, Socket, {
   longPollFallbackMs: 2500,
