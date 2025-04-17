@@ -26,7 +26,7 @@ project-root/
 │   │   ├── accounts/      # アカウント管理（Ash）
 │   │   ├── payment/       # Stripe決済など（Ash）
 │   │   ├── patron/        # プラン管理、契約状態、LiveView画面、Patronページ
-│   │   ├── shop/          # 商品閲覧・カート・購入体験（LiveView + Ash）
+│   │   ├── booth/         # 商品閲覧・カート・購入体験（LiveView + Ash）
 │   │   ├── download/      # 購入済みデータのダウンロード
 │   │   ├── blog/          # Earmark + NimblePublisher
 │   │
