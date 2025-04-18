@@ -9,8 +9,8 @@
     - `PostgreSQL`: データベース管理システム
     - `Elixir/Phoenix`: Webアプリケーションフレームワーク
       - `Tailwind CSS`: CSSフレームワーク
-      - `Ash Framework`: データベースのCRUD操作や認証/認可の管理
-      - `Stripe`: `stripity_stripe`を使った決済システム
+      - (未実装) `Ash Framework`: データベースのCRUD操作や認証/認可の管理
+      - (未実装) `Stripe`: `stripity_stripe`を使った決済システム
 
 ## 開発環境
 - OS: `Ubuntu` | `Mac` | `Windows + WSL2`
