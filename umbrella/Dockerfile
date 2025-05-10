@@ -14,7 +14,11 @@ RUN apt-get update && apt-get install -y inotify-tools
 RUN mix deps.get
 RUN mix compile
 RUN find apps -type f -path "*/assets/package.json" -execdir npm install \;
-RUN mix assets.deploy
+# RUN mix assets.deploy
+RUN for app in top inquiry; do \
+  mix esbuild $app --minify && \
+  mix tailwind $app --minify || exit 1; \
+  done && mix phx.digest
 CMD ["mix", "phx.server"]
 
 # 本番用ビルドステージ
@@ -22,7 +26,11 @@ FROM base as prod_build
 RUN mix deps.get --only prod
 RUN MIX_ENV=prod mix compile
 RUN find apps -type f -path "*/assets/package.json" -execdir npm install \;
-RUN MIX_ENV=prod mix assets.deploy
+# RUN MIX_ENV=prod mix assets.deploy
+RUN for app in top inquiry; do \
+  MIX_ENV=prod mix esbuild $app --minify && \
+  MIX_ENV=prod mix tailwind $app --minify || exit 1; \
+  done && MIX_ENV=prod mix phx.digest
 RUN MIX_ENV=prod mix release  
 # 本番用ランナーステージ（軽量イメージ）
 FROM ubuntu:22.04 as prod
